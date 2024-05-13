@@ -1,7 +1,7 @@
-const {Model, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Trip extends Model {}
+class Trip extends Model { }
 
 Trip.init(
 	{
@@ -12,7 +12,7 @@ Trip.init(
 			autoIncrement: true,
 		},
 		trip_budget: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.DECIMAL,
 			allowNull: false,
 		},
 		traveller_amount: {
@@ -44,3 +44,5 @@ Trip.init(
 		modelName: 'trip',
 	}
 );
+
+module.exports = Trip;
