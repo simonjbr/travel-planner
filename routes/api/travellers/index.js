@@ -56,8 +56,29 @@ router.get('/:id', async (req, res) => {
 		} else {
 			res.status(404).json({message: 'No Traveller with this id'});
 		}
+	} catch (error) {
+		res.status(500).json(error);
+	}
+});
+
+// delete traveller by id
+router.delete('/:id', async (req, res) => {
+	try {
+		const travellerId = req.params.id;
 	
-		
+		const travellerData = await Traveller.findByPk(travellerId);
+
+		if (travellerData) {
+			const deletedTraveller = await Traveller.destroy({
+				where: {
+					id: travellerId,
+				}
+			});
+			
+			res.status(200).json(deletedTraveller);
+		} else {
+			res.status(404).json({message: 'No Traveller with this id'});
+		}
 	} catch (error) {
 		res.status(500).json(error);
 	}
