@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+// Trip is the associative table for the Traveller-Location many-to-many assoc
 class Trip extends Model { }
 
 Trip.init(
