@@ -17,4 +17,27 @@ router.post('/', async (req, res) => {
 	}
 });
 
+// delete trip by id
+router.delete('/:id', async (req, res) => {
+	try {
+		const tripId = req.params.id;
+
+		const tripData = await Trip.findByPk(tripId);
+
+		if (tripData) {
+			const deletedTrip = await Trip.destroy({
+				where: {
+					id: tripId,
+				}
+			});
+
+			res.status(200).json(deletedTrip);
+		} else {
+			res.status(404).json({ message: 'No Trip with this id' });
+		}
+	} catch (error) {
+		res.status(500).json(error);
+	}
+});
+
 module.exports = router;
