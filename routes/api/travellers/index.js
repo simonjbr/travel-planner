@@ -1,5 +1,37 @@
 const router = require('express').Router();
+const { Traveller, Location, Trip } = require('../../../models');
+const sequelize = require('../../../config/connection');
 
-// routes
+// get all Travellers
+router.get('/', async (req, res) => {
+	try {
+		const travellerData = await Traveller.findAll();
+
+		if (travellerData) {
+			res.status(200).json(travellerData);
+		} else {
+			res.status(404).json({ message: 'There is no Traveller data' });
+		}
+		
+	} catch (error) {
+		res.status(500).json(error);
+	}
+
+});
+
+// create new Traveller
+router.post('/', async (req, res) => {
+	try {
+		const { name, email } = req.body;
+		const createTraveller = await Traveller.create({
+			name,
+			email,
+		});
+		console.log(createTraveller);
+		res.status(200).json(createTraveller);
+	} catch (error) {
+		res.status(500).json(error);
+	}
+});
 
 module.exports = router;
