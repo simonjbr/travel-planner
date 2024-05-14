@@ -28,7 +28,7 @@ app.use(routes);
 const main = async function () {
 	await seedDatabase();
 
-	app.listen(PORT, () => console.log(`App listening at https://localhost:${PORT}`));
+	app.listen(PORT, () => console.log(`App listening on port: ${PORT}`));
 };
 
 // execute main function
