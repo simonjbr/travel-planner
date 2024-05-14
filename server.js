@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const sequelize = require('./config/connection');
+const seedDatabase = require('./seeds/seed');
 
 // import models to sync with the database
 const models = require('./models');
@@ -13,6 +14,18 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-sequelize.sync({ force: true }).then(() => {
+// sequelize.sync({ force: true }).then(() => {
+// 	app.listen(PORT, () => console.log(`App listening at https://localhost:${PORT}`));
+// });
+
+// seedDatabase().then(() => {
+// 	app.listen(PORT, () => console.log(`App listening at https://localhost:${PORT}`));
+// });
+
+const main = async function () {
+	await seedDatabase();
+
 	app.listen(PORT, () => console.log(`App listening at https://localhost:${PORT}`));
-});
+};
+
+main();
